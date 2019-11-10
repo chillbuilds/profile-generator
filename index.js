@@ -1,24 +1,16 @@
 const fs = require("fs");
-convertFactory = require('electron-html-to');
 const axios = require("axios");
 const inquirer = require("inquirer");
+const pdf = require('html-pdf');
 
-var convertFactory = require('electron-html-to');
+var html = fs.readFileSync('./index.html', 'utf8');
+var options = { format: 'Letter' };
  
-var conversion = convertFactory({
-  converterPath: convertFactory.converters.PDF
+pdf.create(html, options).toFile('./test2.pdf', function(err, res) {
+  if (err) return console.log(err);
+  console.log(res); // { filename: '/app/businesscard.pdf' }
 });
- 
-conversion({ html: '<h1>Hello World</h1>' }, function(err, result) {
-  if (err) {
-    return console.error(err);
-  }
- 
-  console.log(result.numberOfPages);
-  console.log(result.logs);
-  result.stream.pipe(fs.createWriteStream('C:/Users/Public'));
-  conversion.kill(); // necessary if you use the electron-server strategy, see bellow for details
-});
+
 
 inquirer.prompt([  
     // {type: "input",
