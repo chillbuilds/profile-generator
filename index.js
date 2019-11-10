@@ -1,6 +1,7 @@
 const fs = require("fs");
 const axios = require("axios");
 const inquirer = require("inquirer");
+var x = "";
 
 
 inquirer.prompt([  
@@ -16,21 +17,13 @@ inquirer.prompt([
     const queryUrl = `https://api.github.com/users/heliumface770`;
 
     axios.get(queryUrl).then(function(res) {
-        console.log(res);
-      const repoNames = res.data.map(function(repo) {
-          //data is array that contains all repos
-        return repo.name;
-      });
-
-    //   const repoNamesStr = repoNames.join("\n");
-
-    //   fs.writeFile("repos.txt", repoNamesStr, function(err) {
-    //     if (err) {
-    //       throw err;
-    //     }
-
-        // console.log(`Saved ${repoNames.length} repos`);
-        console.log(res)
-      });
+        html(res);
     });
+});
+
+function html(res){
+    let x = res.data;
+    var avatar =  x.avatar_url;
+    console.log(avatar);
+    }
   
