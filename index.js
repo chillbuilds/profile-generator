@@ -2,9 +2,11 @@ const fs = require("fs");
 const axios = require("axios");
 const inquirer = require("inquirer");
 const pdf = require('html-pdf');
+var html = require("./generateHTML")
 
-var html = fs.readFileSync('./index.html', 'utf8');
+// var html = fs.readFileSync('./index.html', 'utf8');
 var options = { format: 'Letter' };
+
  
 pdf.create(html, options).toFile('./test2.pdf', function(err, res) {
   if (err) return console.log(err);
