@@ -1,8 +1,33 @@
 const fs = require("fs");
 const axios = require("axios");
 const inquirer = require("inquirer");
-var x = "";
 
+const colors = {
+    red: {
+
+    },
+    orange: {
+
+    },
+    yellow: {
+
+    },
+    green: {
+
+    },
+    blue: {
+
+    },
+    purple: {
+
+    },
+    black: {
+
+    },
+    white: {
+        
+    }
+}
 
 inquirer.prompt([  
     // {type: "input",
@@ -22,8 +47,18 @@ inquirer.prompt([
 });
 
 function html(res){
-    let x = res.data;
-    var avatar =  x.avatar_url;
-    console.log(avatar);
+    const x = res.data;
+    const avatar =  x.avatar_url;
+    const login = x.login;
+    const location = x.location;
+    const htmlURL = x.html_url;
+    const blog = x.blog;
+    const bio = x.bio;
+    const repos = x.public_repos;
+    const followers = x.followers;
+    const following = x.following;
+    const name = x.name
+
+
     }
   
