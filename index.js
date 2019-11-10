@@ -1,33 +1,24 @@
 const fs = require("fs");
+convertFactory = require('electron-html-to');
 const axios = require("axios");
 const inquirer = require("inquirer");
 
-const colors = {
-    red: {
-
-    },
-    orange: {
-
-    },
-    yellow: {
-
-    },
-    green: {
-
-    },
-    blue: {
-
-    },
-    purple: {
-
-    },
-    black: {
-
-    },
-    white: {
-
-    }
-}
+var convertFactory = require('electron-html-to');
+ 
+var conversion = convertFactory({
+  converterPath: convertFactory.converters.PDF
+});
+ 
+conversion({ html: '<h1>Hello World</h1>' }, function(err, result) {
+  if (err) {
+    return console.error(err);
+  }
+ 
+  console.log(result.numberOfPages);
+  console.log(result.logs);
+  result.stream.pipe(fs.createWriteStream('C:/Users/Public'));
+  conversion.kill(); // necessary if you use the electron-server strategy, see bellow for details
+});
 
 inquirer.prompt([  
     // {type: "input",

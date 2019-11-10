@@ -25,10 +25,15 @@ background: #00ABE7;
 
 #loc-icon {
     position: absolute;
+    right: 100px;
     left: 23%;
 }
 
+#name {
+    position: relative;
+    font-size: 600%;
 
+}
 
 
 #ref {

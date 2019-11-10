@@ -24,6 +24,32 @@ const colors = {
       photoBorderColor: "white"
     }
   };
+
+  const colors = {
+    red: {
+
+    },
+    orange: {
+
+    },
+    yellow: {
+
+    },
+    green: {
+
+    },
+    blue: {
+
+    },
+    purple: {
+
+    },
+    black: {
+
+    },
+    white: {
+
+    }}
   
   function generateHTML(data) {
     return `<!DOCTYPE html>
