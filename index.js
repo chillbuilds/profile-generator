@@ -2,9 +2,10 @@ const fs = require("fs");
 const axios = require("axios");
 const inquirer = require("inquirer");
 const pdf = require("html-pdf");
-// var html = require("./generateHTML")
+const colors = require("./generateHTML");
 // var html = fs.readFileSync('./index.html', 'utf8');
-var options = { format: "Letter" };
+var options = { "height": "3in",
+                "width": "8in"};
 
 inquirer
   .prompt([
@@ -16,8 +17,7 @@ inquirer
     // name: "color"}
   ])
 
-  .then(function({ username }) {
-    //${username}
+  .then(function({ username }) {                    //${username}
     const queryUrl = `https://api.github.com/users/heliumface770`;
 
     axios.get(queryUrl).then(function(res) {
@@ -37,7 +37,14 @@ function html(res) {
   const followers = x.followers;
   const following = x.following;
   const name = x.name;
-  console.log(avatar);
+  console.log(htmlURL);
+                                                //${username}
+  const queryUrl = `https://api.github.com/users/heliumface770/repos?per_page=100`;
+
+  axios.get(queryUrl).then(function(res) {
+    const repoNames = res.data.map(function(repo) {
+    //   console.log(repo.name)
+    });})
 
   const html = `<!DOCTYPE html>
   <html lang="en">
@@ -49,6 +56,13 @@ function html(res) {
   <style>
       body {
         font-family: 'Oswald', sans-serif;
+        background: yellow;
+        height: 100%;
+      }
+
+      a {
+          text-decoration: none;
+          color: black;
       }
 
       .pageTxt {
@@ -63,7 +77,8 @@ function html(res) {
             border-radius: 50%;
             width: 27%;
             padding: 4%;
-            right: 20px;
+            padding-left: 140px;
+            left: -120px;
             bottom: 20px;
             background: #00abe7;
         }
@@ -71,7 +86,7 @@ function html(res) {
             position: absolute;
             width: 8%;
             top: 214px;
-            right: 740px;
+            left: 5px;
         }
         #loc-icon {
             position: absolute;
@@ -82,20 +97,64 @@ function html(res) {
         }
         #loc {
             position: absolute;
-            top: 224px;
+            top: 227px;
             left: 130px;
-            font-size: 30px;
+            font-size: 26px;
         }
         #name {
             position: absolute;
             text-align: left;
-            left: -200px;
+            left: -215px;
             top: -15px;
             font-size: 50px;
             padding: 10px 500px;
+            padding-bottom: 0px;
             background: #F8A447;
             z-index: -10;
         }
+        #bio {
+            font-size: 20px;
+            position: absolute;
+            top: 85px;
+            left: 290px;
+        }
+
+        #followers {
+            font-size: 24px;
+            position: absolute;
+            top: 228px;
+            left: 275px;
+            padding-bottom: 19px;
+        }
+
+        #following {
+            font-size: 24px;
+            position: absolute;
+            top: 228px;
+            right: 240px;
+        }
+
+        #repos {
+            font-size: 24px;
+            position: absolute;
+            top: 228px;
+            right: 60px;
+        }
+
+        #portfolio {
+            position: absolute;
+            font-size: 24px;
+            top: 190px;
+            left: 275px;
+        }
+
+        #link-icon {
+            position: relative;
+            top: -2px;
+            width: 4%;
+
+        }
+
         #ref {
             position: absolute;
             float: left;
@@ -112,17 +171,24 @@ function html(res) {
         id="avatarJPG"
         src="${avatar}"
         />
-        <img
-        class="icon"
-        id="github-icon"
-        src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-social-github-256.png"
-        />
+        <a href="${htmlURL}">
+        <img id="github-icon" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-social-github-256.png"/>
+        </a>
         <img id="loc-icon" src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/94-256.png" />
-        <div class="pageTxt" id="loc">${location}</div>
+        <div class="pageTxt" id="loc">
+        <a target="_blank" href="https://www.google.com/maps/place/${location}">${location}</a></div>
         <div id="name">${login}</div>
         </div>
         </div>
-        <!-- <img id="ref" src="./images/design.png" /> -->
+        <div id="headerTxt">
+            <div id="bio">Bio: ${bio}</div>
+            <div id="portfolio"><a href="${blog}" target="_blank"><img id="link-icon" src="https://cdn0.iconfinder.com/data/icons/entypo/80/link5-256.png">
+            Portfolio</a></div>
+            <div id="followers">Followers: ${followers}</div>
+            <div id="following">Following: ${following}</div>
+            <div id="repos">Repositories: ${repos}</div>
+        </div>
+
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <script src="./index.js"></script>
         </body>
@@ -132,5 +198,6 @@ function html(res) {
   pdf.create(html, options).toFile("./test2.pdf", function(err, res) {
     if (err) return console.log(err);
     console.log(res); // { filename: '/app/businesscard.pdf' }
+    console.log(followers);
   });
 }
