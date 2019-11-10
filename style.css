@@ -1,0 +1,41 @@
+.pageTxt {
+    position: absolute;
+    font-size: 300%;
+    top: 2%;
+    left: 25%;
+}
+
+#avatarJPG {
+position: relative;
+float: left;
+border-radius: 50%;
+width: 27%;
+padding: 4%;
+right: 20px;
+bottom: 20px;
+background: #00ABE7;
+}
+
+#github-icon {
+    position: absolute;
+    float: left;
+    left: 1%;
+    width: 5%;
+}
+
+#loc-icon {
+    position: absolute;
+    left: 23%;
+}
+
+
+
+
+#ref {
+    position: absolute;
+    float: left;
+    top: 800px;
+    right: 20px;
+    width: 100%;
+
+}

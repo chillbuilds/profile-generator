@@ -25,7 +25,7 @@ const colors = {
 
     },
     white: {
-        
+
     }
 }
 
@@ -59,6 +59,7 @@ function html(res){
     const following = x.following;
     const name = x.name
 
-
     }
+
+ 
   
