@@ -21,8 +21,6 @@ inquirer
     const queryUrl = `https://api.github.com/users/${data.username}`;
     axios.get(queryUrl).then(function(res) {
       html(res, data);
-      const num = 45;
-      module.exports = num;
     });
   });
 
@@ -195,7 +193,7 @@ function html(res, data) {
         </html>
         `;
 
-  pdf.create(html, options).toFile("./test2.pdf", function(err, res) {
+  pdf.create(html, options).toFile(`./${login}.pdf`, function(err, res) {
     if (err) return console.log(err);
     console.log("\n****************************\n  PDF successfully created\n****************************");
   });
