@@ -30,9 +30,9 @@ const colors = {
         avatar: "#6369D1"
     },
     black: {
-        main: "#5941A9",
+        main: "#333333",
         header: "#2A2A2A",
         avatar: "#4A4A4A"
     }}
-  
-module.exports = colors;
+
+    module.exports = colors;

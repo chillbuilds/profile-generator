@@ -9,23 +9,26 @@ var options = { "height": "3in",
 
 inquirer
   .prompt([
-    // {type: "input",
-    // message: "What's your GitHub username?",
-    // name: "username"},
-    // {type: "input",
-    // message: "What's your favorite color?",
-    // name: "color"}
+    {type: "input",
+    message: "What's your GitHub username?",
+    name: "username"},
+    {type: "list",
+    name: "color",
+    message: "What's your favorite color?",
+    choices: ["red", "orange", "yellow", "green", "blue", "purple", "black"]}
   ])
 
-  .then(function({ username }) {                    //${username}
-    const queryUrl = `https://api.github.com/users/heliumface770`;
-
+  .then(function(data) { 
+    
+      console.log(data.color);              //${username}
+    const queryUrl = `https://api.github.com/users/${data.username}`;
     axios.get(queryUrl).then(function(res) {
-      html(res);
+      html(res, data);
     });
   });
 
-function html(res) {
+function html(res, data) {
+    const y = data.color;
   const x = res.data;
   const avatar = x.avatar_url;
   const login = x.login;
@@ -37,15 +40,7 @@ function html(res) {
   const followers = x.followers;
   const following = x.following;
   const name = x.name;
-  console.log(htmlURL);
-                                                //${username}
-  const queryUrl = `https://api.github.com/users/heliumface770/repos?per_page=100`;
-
-  axios.get(queryUrl).then(function(res) {
-    const repoNames = res.data.map(function(repo) {
-    //   console.log(repo.name)
-    });})
-
+  
   const html = `<!DOCTYPE html>
   <html lang="en">
   <head>
@@ -56,7 +51,7 @@ function html(res) {
   <style>
       body {
         font-family: 'Oswald', sans-serif;
-        background: yellow;
+        background: ${colors[data.color].main};
         height: 100%;
       }
 
@@ -80,7 +75,7 @@ function html(res) {
             padding-left: 140px;
             left: -120px;
             bottom: 20px;
-            background: #00abe7;
+            background: ${colors[data.color].avatar};
         }
         #github-icon {
             position: absolute;
@@ -109,7 +104,7 @@ function html(res) {
             font-size: 50px;
             padding: 10px 500px;
             padding-bottom: 0px;
-            background: #F8A447;
+            background: ${colors[data.color].header};
             z-index: -10;
         }
         #bio {
@@ -198,6 +193,5 @@ function html(res) {
   pdf.create(html, options).toFile("./test2.pdf", function(err, res) {
     if (err) return console.log(err);
     console.log(res); // { filename: '/app/businesscard.pdf' }
-    console.log(followers);
   });
 }
