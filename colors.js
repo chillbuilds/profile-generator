@@ -10,8 +10,8 @@ const colors = {
         avatar: "#FCCA46"
     },
     yellow: {
-        main: "#FED766",
-        header: "#F79824",
+        main: "#FCCA46",
+        header: "#FBB704",
         avatar: "#33A1FD"
     },
     green: {

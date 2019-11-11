@@ -1,7 +1,7 @@
 const axios = require("axios");
 const inquirer = require("inquirer");
 const pdf = require("html-pdf");
-const colors = require("./generateHTML");
+const colors = require("./colors");
 var options = { "height": "3in",
                 "width": "8in"};
 
@@ -142,11 +142,18 @@ function html(res, data) {
             left: 275px;
         }
 
-        #link-icon {
+        .link-icon {
             position: relative;
             top: -2px;
             width: 4%;
 
+        }
+
+        #github {
+            position: absolute;
+            font-size: 24px;
+            top: 190px;
+            left: 475px;
         }
 
         #ref {
@@ -165,9 +172,6 @@ function html(res, data) {
         id="avatarJPG"
         src="${avatar}"
         />
-        <a href="${htmlURL}">
-        <img id="github-icon" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-social-github-256.png"/>
-        </a>
         <img id="loc-icon" src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/94-256.png" />
         <div class="pageTxt" id="loc">
         <a target="_blank" href="https://www.google.com/maps/place/${location}">${location}</a></div>
@@ -176,8 +180,10 @@ function html(res, data) {
         </div>
         <div id="headerTxt">
             <div id="bio">Bio: ${bio}</div>
-            <div id="portfolio"><a href="${blog}" target="_blank"><img id="link-icon" src="https://cdn0.iconfinder.com/data/icons/entypo/80/link5-256.png">
+            <div id="portfolio"><a href="${blog}" target="_blank"><img class="link-icon" src="https://cdn0.iconfinder.com/data/icons/entypo/80/link5-256.png">
             Portfolio</a></div>
+            <div id="github"><a href="${htmlURL}" target="_blank"><img class="link-icon" src="https://cdn0.iconfinder.com/data/icons/entypo/80/link5-256.png">
+            GitHub</a></div>
             <div id="followers">Followers: ${followers}</div>
             <div id="following">Following: ${following}</div>
             <div id="repos">Repositories: ${repos}</div>
@@ -191,6 +197,6 @@ function html(res, data) {
 
   pdf.create(html, options).toFile("./test2.pdf", function(err, res) {
     if (err) return console.log(err);
-    console.log("PDF successfully created");
+    console.log("\n****************************\n  PDF successfully created\n****************************");
   });
 }
