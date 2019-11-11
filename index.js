@@ -1,9 +1,7 @@
-const fs = require("fs");
 const axios = require("axios");
 const inquirer = require("inquirer");
 const pdf = require("html-pdf");
 const colors = require("./generateHTML");
-// var html = fs.readFileSync('./index.html', 'utf8');
 var options = { "height": "3in",
                 "width": "8in"};
 
@@ -19,11 +17,12 @@ inquirer
   ])
 
   .then(function(data) { 
-    
-      console.log(data.color);              //${username}
+                 
     const queryUrl = `https://api.github.com/users/${data.username}`;
     axios.get(queryUrl).then(function(res) {
       html(res, data);
+      const num = 45;
+      module.exports = num;
     });
   });
 
@@ -192,6 +191,6 @@ function html(res, data) {
 
   pdf.create(html, options).toFile("./test2.pdf", function(err, res) {
     if (err) return console.log(err);
-    console.log(res); // { filename: '/app/businesscard.pdf' }
+    console.log("PDF successfully created");
   });
 }
