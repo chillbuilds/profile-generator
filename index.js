@@ -84,13 +84,13 @@ function html(res, data) {
             position: absolute;
             width: 20px;
             right: 100px;
-            left: 22%;
+            left: 25px;
             top: 220px;
         }
         #loc {
             position: absolute;
             top: 227px;
-            left: 130px;
+            left: 15px;
             font-size: 26px;
         }
         #name {
@@ -141,10 +141,8 @@ function html(res, data) {
         }
 
         .link-icon {
-            position: relative;
             top: -2px;
             width: 4%;
-
         }
 
         #github {
